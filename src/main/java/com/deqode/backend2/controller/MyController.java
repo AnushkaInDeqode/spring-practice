@@ -20,114 +20,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.deqode.backend2.model.Employee;
 import com.deqode.backend2.repository.EmployeeRepository;
+import com.deqode.backend2.service.EmployeeService;
 
 @RestController
 @RequestMapping("/employee")
 public class MyController {
 
 	@Autowired
-	private EmployeeRepository empRepository;
+	EmployeeService empService;
 	
-	@GetMapping("/getEmp/{name}")
-	public ResponseEntity<List> getEmployeebyName(@RequestParam(required = false) String name){
-
-		try{
-			
-            List empList = new ArrayList<>();
-            
-            if(name == null || name.isEmpty())
-            	empRepository.findAll().forEach(empList::add);
-            
-            else
-            	empRepository.findByName(name).forEach(empList::add);
-            
-            if(empList.isEmpty())
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            
-            return new ResponseEntity<>(empList, HttpStatus.OK);
-        }
-        catch (Exception e)
-        {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-	}
-	
-	@GetMapping("/getEmp/{id}")
-    public ResponseEntity getEmployeeById(@PathVariable("id") Integer id)
-    {
-        try
-        {
-        	Optional<Employee> empId = empRepository.findById(id);
-
-            return new ResponseEntity<>(empId.get(), HttpStatus.OK);
-        }
-        catch (Exception e)
-        {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-	
-	@GetMapping("/getEmp/{company}")
-    public ResponseEntity getEmployeeByCompany(@RequestParam(required = false) String company)
-    {
-        try
-        {
-        	List<Employee> empId = empRepository.findByCompany(company);
-
-            return new ResponseEntity<>(empId.get(0), HttpStatus.OK);
-        }
-        catch (Exception e)
-        {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-	
-	@PostMapping("/addEmp")
-	public ResponseEntity<?> addEmployee(@RequestBody Employee emp){
-
-		try
-        {
-            Employee createdEmp = empRepository.save(new Employee(emp.getName(), emp.getCompany(), emp.getAddress()));
-            return new ResponseEntity<>(createdEmp, HttpStatus.CREATED);
-        }
-        catch (Exception e)
-        {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-	   
-	}
-	
-	@PutMapping("/employee/{id}")
-    public ResponseEntity updateABook(@PathVariable("id") Integer id, @RequestBody Employee emp)
-    {
-        Optional empId = empRepository.findById(id);
-
-        if(empId.isPresent())
-        {
-            Employee updatedEmployee = (Employee) empId.get();
-            updatedEmployee.setName(emp.getName());
-            updatedEmployee.setCompany(emp.getCompany());
-            updatedEmployee.setAddress(emp.getAddress());
-            return new ResponseEntity<>(empRepository.save(updatedEmployee), HttpStatus.OK);
-        }
-        else
-        {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+	@PostMapping("/add")
+    public Employee createEmployee(@RequestBody Employee emp) {
+        return empService.addEmployee(emp);
     }
 
-    @DeleteMapping("/employee/{id}")
-    public ResponseEntity deleteABook(@PathVariable("id") Integer id)
-    {
-        try
-        {
-            empRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        catch (Exception e)
-        {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @GetMapping("/getEmployee/{id}")
+    public Employee getEmployeeById(@PathVariable String id) {
+        return empService.getEmployeeById(id);
+    }
+
+    @GetMapping("/getEmployee")
+    public List<Employee> getAllStudents() {
+        return empService.getEmployees();
+    }
+    
+    @DeleteMapping("/deleteEmployee/{id}")
+    public void deleteEmployee(@PathVariable("id") String id) {
+    	empService.deleteEmployee(id);
     }
 }
 

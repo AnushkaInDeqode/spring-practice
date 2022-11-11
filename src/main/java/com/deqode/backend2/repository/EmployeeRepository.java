@@ -7,10 +7,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.deqode.backend2.model.Employee;
 
-public interface EmployeeRepository extends MongoRepository<Employee, Integer>{
+public interface EmployeeRepository extends MongoRepository<Employee, String>{
 
-	List<Employee> findByName(String name);
-    List<Employee> findByCompany(String company);
-    List<Employee> findById(int id);
-    
 }
