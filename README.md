@@ -21,3 +21,7 @@ Date - 14-11-2022
 
 Date - 15-11-2022
 - Jwt implementation completed
+
+Date - 16-11-2022
+- Implemented swagger and accessed /swagger-ui/index.html
+- Made unit test cases using JUnit and Mockito
