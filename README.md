@@ -19,8 +19,3 @@ Date - 14-11-2022
 
 Date - 15-11-2022
 - Jwt implementation completed
-
-Spring Boot + MongoDB + JWT
-
-Date - 14-11-2022
-- 
