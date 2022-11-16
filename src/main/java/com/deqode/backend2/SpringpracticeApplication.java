@@ -16,6 +16,7 @@ public class SpringpracticeApplication {
 
 	@Autowired
 	UserRepository repository;
+
 /*	@PostConstruct
 	public void initUsers(){
 
