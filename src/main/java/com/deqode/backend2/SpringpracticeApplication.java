@@ -17,7 +17,7 @@ public class SpringpracticeApplication {
 	@Autowired
 	UserRepository repository;
 
-/*	@PostConstruct
+	@PostConstruct
 	public void initUsers(){
 
 		List<User> users= Stream.of(
@@ -29,7 +29,7 @@ public class SpringpracticeApplication {
 		repository.saveAll(users);
 	}
 
- */
+
 	public static void main(String[] args) {
 
 		SpringApplication.run(SpringpracticeApplication.class, args);
