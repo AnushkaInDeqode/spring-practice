@@ -25,3 +25,7 @@ Date - 15-11-2022
 Date - 16-11-2022
 - Implemented swagger and accessed /swagger-ui/index.html
 - Made unit test cases using JUnit and Mockito
+
+Date - 17-11-2022
+- Dockerfile creation to build an image of the application
+- Docker compose file creation to automatically build the application container and connect it to db
