@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-//import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
-/*@SpringBootTest
+@SpringBootTest
 class SpringpracticeApplicationTests {
 
 	@Mock
@@ -53,4 +53,4 @@ class SpringpracticeApplicationTests {
 		employeeService.deleteEmployee("101");
 		verify(employeeRepository, times(1)).deleteById(anyString());
 	}
-} */
+}
